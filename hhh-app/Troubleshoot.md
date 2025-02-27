@@ -8,7 +8,7 @@ Change Execution Policy:
 
 In the PowerShell window, run the following command to allow scripts to be executed:
 
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+**Set-ExecutionPolicy RemoteSigned -Scope CurrentUser**
 
 This allows locally created scripts (like npm.ps1) to run but requires downloaded scripts to be signed by a trusted publisher.
 Confirm the Change:
@@ -21,6 +21,6 @@ Run the React App Again:
 
 Open a new regular PowerShell or Command Prompt window and navigate to your project folder, then try running npm start again:
 
-npm start
+**npm start**
 
 This should resolve the issue, and your React app should now start without the script execution error. Let me know if it works!

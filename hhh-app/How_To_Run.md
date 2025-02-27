@@ -6,8 +6,8 @@ First, ensure that you have Node.js and npm (Node package manager) installed on 
 Download Node.js (npm comes with Node.js).
 After installation, check the versions by running the following commands in your terminal:
 
-node -v
-npm -v
+**node -v**
+**npm -v**
 
 2. Install VS Code Extensions
 For a smooth React development experience, install the following extensions in VS Code:
@@ -26,8 +26,8 @@ You can use create-react-app, which is a tool that sets up a React project with 
 
 Open your terminal/command prompt and run the following commands:
 
-npx create-react-app hhh-app
-cd hhh-app
+**npx create-react-app hhh-app**
+**cd hhh-app**
 
 This will create a new React project in a folder called hhh-app and automatically install all the dependencies.
 
@@ -43,6 +43,6 @@ Now that your project is set up, you can run the development server to see the r
 
 In the terminal, run:
 
-npm start
+**npm start**
 
 This will start the development server, and you can view the app by navigating to http://localhost:3000 in your browser.
