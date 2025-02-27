@@ -4,6 +4,6 @@
 ## Team Members: 
 ### Tim Haxton, Cooper Wolf,  Jon Scales
 ## Project Title: 
-###  HHHH Ride App 
+###  HHH Ride App 
 
 
