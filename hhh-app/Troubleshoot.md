@@ -24,3 +24,14 @@ Open a new regular PowerShell or Command Prompt window and navigate to your proj
 **npm start**
 
 This should resolve the issue, and your React app should now start without the script execution error. Let me know if it works!
+
+
+### need to run: **cd hhh-app** ###
+
+Then,
+
+**npm start**
+
+When finished view,
+
+**ctrl c**
