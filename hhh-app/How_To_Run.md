@@ -26,7 +26,14 @@ To install these, just go to the Extensions tab in VS Code (on the left sidebar)
 Now that your project is set up, you can run the development server to see the result.
 
 In the terminal, run:
+### need to run: **cd hhh-app** ###
+
+Then,
 
 **npm start**
 
 This will start the development server, and you can view the app by navigating to http://localhost:3000 in your browser.
+
+When finished view,
+
+**ctrl c**
