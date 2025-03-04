@@ -1,3 +1,17 @@
+Delete and Reinstall node_modules:
+
+Sometimes, the node_modules folder can become corrupted. Delete it along with the package-lock.json file:
+
+bash
+rm -rf node_modules package-lock.json
+Then, reinstall dependencies:
+
+bash
+npm install
+
+
+
+
 The error you're seeing is related to Windows PowerShell's execution policy that prevents running scripts (such as npm.ps1) due to security settings. You can fix this by changing the execution policy for PowerShell.
 
 Steps to fix the issue:

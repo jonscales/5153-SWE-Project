@@ -1,3 +1,5 @@
+// If we plan on displaying this for our IT2 prez. We need to comment throughout
+
 import { useState } from "react";
 
 export default function App() {
