@@ -6,4 +6,6 @@
 ## Project Title: 
 ###  HHH Ride App 
 
+flutterflowcode.zip  - contains all the flutterflow files made by copying code into vs code and saving in a folder.  
+                       contains 21 fils for pages + .yaml.  Assets subfolder contains all images & pdfs used in app. 
 
