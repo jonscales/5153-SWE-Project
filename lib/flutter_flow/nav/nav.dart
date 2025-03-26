@@ -1,0 +1,502 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
+
+export 'package:go_router/go_router.dart';
+export 'serialization_util.dart';
+
+const kTransitionInfoKey = '__transition_info__';
+
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
+class AppStateNotifier extends ChangeNotifier {
+  AppStateNotifier._();
+
+  static AppStateNotifier? _instance;
+  static AppStateNotifier get instance => _instance ??= AppStateNotifier._();
+
+  bool showSplashImage = true;
+
+  void stopShowingSplashImage() {
+    showSplashImage = false;
+    notifyListeners();
+  }
+}
+
+GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+      initialLocation: '/',
+      debugLogDiagnostics: true,
+      refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
+      errorBuilder: (context, state) => ALandingPageWidget(),
+      routes: [
+        FFRoute(
+          name: '_initialize',
+          path: '/',
+          builder: (context, _) => ALandingPageWidget(),
+        ),
+        FFRoute(
+          name: ALandingPageWidget.routeName,
+          path: ALandingPageWidget.routePath,
+          builder: (context, params) => ALandingPageWidget(
+            firstName: params.getParam(
+              'firstName',
+              ParamType.String,
+            ),
+            lastName: params.getParam(
+              'lastName',
+              ParamType.String,
+            ),
+            email: params.getParam(
+              'email',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: BMainMenuWidget.routeName,
+          path: BMainMenuWidget.routePath,
+          builder: (context, params) => BMainMenuWidget(),
+        ),
+        FFRoute(
+          name: DRegistrationChoiceWidget.routeName,
+          path: DRegistrationChoiceWidget.routePath,
+          builder: (context, params) => DRegistrationChoiceWidget(),
+        ),
+        FFRoute(
+          name: SchedulesWidget.routeName,
+          path: SchedulesWidget.routePath,
+          builder: (context, params) => SchedulesWidget(),
+        ),
+        FFRoute(
+          name: ZMapsWidget.routeName,
+          path: ZMapsWidget.routePath,
+          builder: (context, params) => ZMapsWidget(),
+        ),
+        FFRoute(
+          name: TradeshowWidget.routeName,
+          path: TradeshowWidget.routePath,
+          builder: (context, params) => TradeshowWidget(),
+        ),
+        FFRoute(
+          name: SAGCallWidget.routeName,
+          path: SAGCallWidget.routePath,
+          builder: (context, params) => SAGCallWidget(),
+        ),
+        FFRoute(
+          name: ELoginWidget.routeName,
+          path: ELoginWidget.routePath,
+          builder: (context, params) => ELoginWidget(),
+        ),
+        FFRoute(
+          name: LocalDiningWidget.routeName,
+          path: LocalDiningWidget.routePath,
+          builder: (context, params) => LocalDiningWidget(),
+        ),
+        FFRoute(
+          name: LodgingWidget.routeName,
+          path: LodgingWidget.routePath,
+          builder: (context, params) => LodgingWidget(),
+        ),
+        FFRoute(
+          name: CEventsInfoMapsWidget.routeName,
+          path: CEventsInfoMapsWidget.routePath,
+          builder: (context, params) => CEventsInfoMapsWidget(),
+        ),
+        FFRoute(
+          name: Map10KWidget.routeName,
+          path: Map10KWidget.routePath,
+          builder: (context, params) => Map10KWidget(
+            mapImagePath: params.getParam(
+              'mapImagePath',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MapEnduranceRoutesWidget.routeName,
+          path: MapEnduranceRoutesWidget.routePath,
+          builder: (context, params) => MapEnduranceRoutesWidget(
+            mapImagePath: params.getParam(
+              'mapImagePath',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MapStartLineWidget.routeName,
+          path: MapStartLineWidget.routePath,
+          builder: (context, params) => MapStartLineWidget(
+            mapImagePath: params.getParam(
+              'mapImagePath',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ZMapViewerWidget.routeName,
+          path: ZMapViewerWidget.routePath,
+          builder: (context, params) => ZMapViewerWidget(
+            mapImagePath: params.getParam(
+              'mapImagePath',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MapMBRunWidget.routeName,
+          path: MapMBRunWidget.routePath,
+          builder: (context, params) => MapMBRunWidget(
+            mapImagePath: params.getParam(
+              'mapImagePath',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MapParkingAccessWidget.routeName,
+          path: MapParkingAccessWidget.routePath,
+          builder: (context, params) => MapParkingAccessWidget(
+            mapImagePath: params.getParam(
+              'mapImagePath',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RegistrationWidget.routeName,
+          path: RegistrationWidget.routePath,
+          builder: (context, params) => RegistrationWidget(),
+        ),
+        FFRoute(
+          name: MapGravelWidget.routeName,
+          path: MapGravelWidget.routePath,
+          builder: (context, params) => MapGravelWidget(
+            mapImagePath: params.getParam(
+              'mapImagePath',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RegEnduranceWidget.routeName,
+          path: RegEnduranceWidget.routePath,
+          builder: (context, params) => RegEnduranceWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RegGravelWidget.routeName,
+          path: RegGravelWidget.routePath,
+          builder: (context, params) => RegGravelWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: XRegMTBikeWidget.routeName,
+          path: XRegMTBikeWidget.routePath,
+          builder: (context, params) => XRegMTBikeWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RegRunWidget.routeName,
+          path: RegRunWidget.routePath,
+          builder: (context, params) => RegRunWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Reg10KAdultWidget.routeName,
+          path: Reg10KAdultWidget.routePath,
+          builder: (context, params) => Reg10KAdultWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ZRegCritsWidget.routeName,
+          path: ZRegCritsWidget.routePath,
+          builder: (context, params) => ZRegCritsWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Reg10KChildWidget.routeName,
+          path: Reg10KChildWidget.routePath,
+          builder: (context, params) => Reg10KChildWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: WaiverAdultWidget.routeName,
+          path: WaiverAdultWidget.routePath,
+          builder: (context, params) => WaiverAdultWidget(),
+        ),
+        FFRoute(
+          name: WaiverMinorWidget.routeName,
+          path: WaiverMinorWidget.routePath,
+          builder: (context, params) => WaiverMinorWidget(),
+        ),
+        FFRoute(
+          name: PaymentPageWidget.routeName,
+          path: PaymentPageWidget.routePath,
+          builder: (context, params) => PaymentPageWidget(),
+        ),
+        FFRoute(
+          name: ProfileWidget.routeName,
+          path: ProfileWidget.routePath,
+          builder: (context, params) => ProfileWidget(
+            firstName: params.getParam(
+              'firstName',
+              ParamType.String,
+            ),
+            lastName: params.getParam(
+              'lastName',
+              ParamType.String,
+            ),
+            email: params.getParam(
+              'email',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RoutesSelectionWidget.routeName,
+          path: RoutesSelectionWidget.routePath,
+          builder: (context, params) => RoutesSelectionWidget(),
+        ),
+        FFRoute(
+          name: RegMTBWidget.routeName,
+          path: RegMTBWidget.routePath,
+          builder: (context, params) => RegMTBWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: SAGCallResponseWidget.routeName,
+          path: SAGCallResponseWidget.routePath,
+          builder: (context, params) => SAGCallResponseWidget(),
+        )
+      ].map((r) => r.toRoute(appStateNotifier)).toList(),
+    );
+
+extension NavParamExtensions on Map<String, String?> {
+  Map<String, String> get withoutNulls => Map.fromEntries(
+        entries
+            .where((e) => e.value != null)
+            .map((e) => MapEntry(e.key, e.value!)),
+      );
+}
+
+extension NavigationExtensions on BuildContext {
+  void safePop() {
+    // If there is only one route on the stack, navigate to the initial
+    // page instead of popping.
+    if (canPop()) {
+      pop();
+    } else {
+      go('/');
+    }
+  }
+}
+
+extension _GoRouterStateExtensions on GoRouterState {
+  Map<String, dynamic> get extraMap =>
+      extra != null ? extra as Map<String, dynamic> : {};
+  Map<String, dynamic> get allParams => <String, dynamic>{}
+    ..addAll(pathParameters)
+    ..addAll(uri.queryParameters)
+    ..addAll(extraMap);
+  TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
+      ? extraMap[kTransitionInfoKey] as TransitionInfo
+      : TransitionInfo.appDefault();
+}
+
+class FFParameters {
+  FFParameters(this.state, [this.asyncParams = const {}]);
+
+  final GoRouterState state;
+  final Map<String, Future<dynamic> Function(String)> asyncParams;
+
+  Map<String, dynamic> futureParamValues = {};
+
+  // Parameters are empty if the params map is empty or if the only parameter
+  // present is the special extra parameter reserved for the transition info.
+  bool get isEmpty =>
+      state.allParams.isEmpty ||
+      (state.allParams.length == 1 &&
+          state.extraMap.containsKey(kTransitionInfoKey));
+  bool isAsyncParam(MapEntry<String, dynamic> param) =>
+      asyncParams.containsKey(param.key) && param.value is String;
+  bool get hasFutures => state.allParams.entries.any(isAsyncParam);
+  Future<bool> completeFutures() => Future.wait(
+        state.allParams.entries.where(isAsyncParam).map(
+          (param) async {
+            final doc = await asyncParams[param.key]!(param.value)
+                .onError((_, __) => null);
+            if (doc != null) {
+              futureParamValues[param.key] = doc;
+              return true;
+            }
+            return false;
+          },
+        ),
+      ).onError((_, __) => [false]).then((v) => v.every((e) => e));
+
+  dynamic getParam<T>(
+    String paramName,
+    ParamType type, {
+    bool isList = false,
+  }) {
+    if (futureParamValues.containsKey(paramName)) {
+      return futureParamValues[paramName];
+    }
+    if (!state.allParams.containsKey(paramName)) {
+      return null;
+    }
+    final param = state.allParams[paramName];
+    // Got parameter from `extras`, so just directly return it.
+    if (param is! String) {
+      return param;
+    }
+    // Return serialized value.
+    return deserializeParam<T>(
+      param,
+      type,
+      isList,
+    );
+  }
+}
+
+class FFRoute {
+  const FFRoute({
+    required this.name,
+    required this.path,
+    required this.builder,
+    this.requireAuth = false,
+    this.asyncParams = const {},
+    this.routes = const [],
+  });
+
+  final String name;
+  final String path;
+  final bool requireAuth;
+  final Map<String, Future<dynamic> Function(String)> asyncParams;
+  final Widget Function(BuildContext, FFParameters) builder;
+  final List<GoRoute> routes;
+
+  GoRoute toRoute(AppStateNotifier appStateNotifier) => GoRoute(
+        name: name,
+        path: path,
+        pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
+          final ffParams = FFParameters(state, asyncParams);
+          final page = ffParams.hasFutures
+              ? FutureBuilder(
+                  future: ffParams.completeFutures(),
+                  builder: (context, _) => builder(context, ffParams),
+                )
+              : builder(context, ffParams);
+          final child = page;
+
+          final transitionInfo = state.transitionInfo;
+          return transitionInfo.hasTransition
+              ? CustomTransitionPage(
+                  key: state.pageKey,
+                  child: child,
+                  transitionDuration: transitionInfo.duration,
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          PageTransition(
+                    type: transitionInfo.transitionType,
+                    duration: transitionInfo.duration,
+                    reverseDuration: transitionInfo.duration,
+                    alignment: transitionInfo.alignment,
+                    child: child,
+                  ).buildTransitions(
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ),
+                )
+              : MaterialPage(key: state.pageKey, child: child);
+        },
+        routes: routes,
+      );
+}
+
+class TransitionInfo {
+  const TransitionInfo({
+    required this.hasTransition,
+    this.transitionType = PageTransitionType.fade,
+    this.duration = const Duration(milliseconds: 300),
+    this.alignment,
+  });
+
+  final bool hasTransition;
+  final PageTransitionType transitionType;
+  final Duration duration;
+  final Alignment? alignment;
+
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+}
+
+class RootPageContext {
+  const RootPageContext(this.isRootPage, [this.errorRoute]);
+  final bool isRootPage;
+  final String? errorRoute;
+
+  static bool isInactiveRootPage(BuildContext context) {
+    final rootPageContext = context.read<RootPageContext?>();
+    final isRootPage = rootPageContext?.isRootPage ?? false;
+    final location = GoRouterState.of(context).uri.toString();
+    return isRootPage &&
+        location != '/' &&
+        location != rootPageContext?.errorRoute;
+  }
+
+  static Widget wrap(Widget child, {String? errorRoute}) => Provider.value(
+        value: RootPageContext(true, errorRoute),
+        child: child,
+      );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
+}

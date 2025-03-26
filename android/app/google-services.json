@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "713086161262",
+    "project_id": "h-h-h-the-ride-app-8hkscw",
+    "storage_bucket": "h-h-h-the-ride-app-8hkscw.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713086161262:android:71bf8c86c9a02c11f7b17f",
+        "android_client_info": {
+          "package_name": "com.mycompany.hhhtherideapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713086161262-5mr9nqn86gc383uo4c4tkcn9pt10odva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.hhhtherideapp",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "713086161262-71ik2ra8v35m0moo2d1ooreg7upsuore.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLMzQLVOyZPzFxwtwqBYq4MgKSdanwIjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713086161262-71ik2ra8v35m0moo2d1ooreg7upsuore.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "713086161262-ln2hcuqqer46dd5eilop6vahs3q715rs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.hhhtherideapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
