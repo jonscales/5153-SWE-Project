@@ -25,6 +25,8 @@ class _LodgingWidgetState extends State<LodgingWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LodgingModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

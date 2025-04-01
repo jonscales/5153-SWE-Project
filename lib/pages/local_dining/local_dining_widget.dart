@@ -25,6 +25,8 @@ class _LocalDiningWidgetState extends State<LocalDiningWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LocalDiningModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

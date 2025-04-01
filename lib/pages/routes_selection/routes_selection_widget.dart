@@ -30,6 +30,8 @@ class _RoutesSelectionWidgetState extends State<RoutesSelectionWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RoutesSelectionModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

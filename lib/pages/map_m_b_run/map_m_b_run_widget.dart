@@ -31,6 +31,8 @@ class _MapMBRunWidgetState extends State<MapMBRunWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapMBRunModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

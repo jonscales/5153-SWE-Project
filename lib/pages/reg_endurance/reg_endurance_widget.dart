@@ -1,4 +1,3 @@
-import '';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,6 +6,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +38,12 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
     super.initState();
     _model = createModel(context, () => RegEnduranceModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().mainEvent = widget.eventName!;
+      safeSetState(() {});
+    });
+
     _model.textController1 ??= TextEditingController(text: widget.eventName);
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -52,23 +58,29 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
     _model.textController4 ??= TextEditingController(text: FFAppState().email);
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController();
+    _model.textController5 ??=
+        TextEditingController(text: FFAppState().phoneNum);
     _model.textFieldFocusNode5 ??= FocusNode();
 
-    _model.textController6 ??= TextEditingController();
+    _model.textController6 ??= TextEditingController(text: FFAppState().city);
     _model.textFieldFocusNode6 ??= FocusNode();
 
-    _model.textController7 ??= TextEditingController();
+    _model.textController7 ??=
+        TextEditingController(text: FFAppState().zipCode);
     _model.textFieldFocusNode7 ??= FocusNode();
 
-    _model.textController8 ??= TextEditingController();
+    _model.textController8 ??= TextEditingController(text: FFAppState().ageStr);
     _model.textFieldFocusNode8 ??= FocusNode();
 
-    _model.textController9 ??= TextEditingController();
+    _model.textController9 ??=
+        TextEditingController(text: FFAppState().emerContName);
     _model.textFieldFocusNode9 ??= FocusNode();
 
-    _model.textController10 ??= TextEditingController();
+    _model.textController10 ??=
+        TextEditingController(text: FFAppState().emerContPhone);
     _model.textFieldFocusNode10 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -158,6 +170,15 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
                                   child: TextFormField(
                                     controller: _model.textController1,
                                     focusNode: _model.textFieldFocusNode1,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController1',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().mainEvent =
+                                            _model.textController1.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -466,6 +487,15 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
                                   child: TextFormField(
                                     controller: _model.textController5,
                                     focusNode: _model.textFieldFocusNode5,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController5',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().phoneNum =
+                                            _model.textController5.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     textCapitalization: TextCapitalization.none,
                                     obscureText: false,
@@ -546,6 +576,15 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
                                   child: TextFormField(
                                     controller: _model.textController6,
                                     focusNode: _model.textFieldFocusNode6,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController6',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().city =
+                                            _model.textController6.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -623,6 +662,15 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
                                   child: TextFormField(
                                     controller: _model.textController7,
                                     focusNode: _model.textFieldFocusNode7,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController7',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().zipCode =
+                                            _model.textController7.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -792,6 +840,15 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
                                   child: TextFormField(
                                     controller: _model.textController9,
                                     focusNode: _model.textFieldFocusNode9,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController9',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().emerContName =
+                                            _model.textController9.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -869,6 +926,15 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
                                   child: TextFormField(
                                     controller: _model.textController10,
                                     focusNode: _model.textFieldFocusNode10,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController10',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().emerContPhone =
+                                            _model.textController10.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -958,11 +1024,25 @@ class _RegEnduranceWidgetState extends State<RegEnduranceWidget> {
                                   return;
                                 }
                                 if (FFAppState().isAdult) {
-                                  context
-                                      .pushNamed(WaiverAdultWidget.routeName);
+                                  context.pushNamed(
+                                    WaiverAdultWidget.routeName,
+                                    queryParameters: {
+                                      'eventName': serializeParam(
+                                        _model.textController1.text,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
                                 } else {
-                                  context
-                                      .pushNamed(WaiverMinorWidget.routeName);
+                                  context.pushNamed(
+                                    WaiverMinorWidget.routeName,
+                                    queryParameters: {
+                                      'eventName': serializeParam(
+                                        _model.textController1.text,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
                                 }
                               },
                               text: 'Sign Waiver',

@@ -31,6 +31,8 @@ class _MapParkingAccessWidgetState extends State<MapParkingAccessWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapParkingAccessModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

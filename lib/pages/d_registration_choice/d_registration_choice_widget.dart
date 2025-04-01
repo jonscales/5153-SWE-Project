@@ -28,6 +28,8 @@ class _DRegistrationChoiceWidgetState extends State<DRegistrationChoiceWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DRegistrationChoiceModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -186,7 +188,7 @@ class _DRegistrationChoiceWidgetState extends State<DRegistrationChoiceWidget> {
                                       Reg10KAdultWidget.routeName,
                                       queryParameters: {
                                         'eventName': serializeParam(
-                                          '10K ADULT',
+                                          '10 K Adult',
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
@@ -230,7 +232,7 @@ class _DRegistrationChoiceWidgetState extends State<DRegistrationChoiceWidget> {
                                       Reg10KChildWidget.routeName,
                                       queryParameters: {
                                         'eventName': serializeParam(
-                                          '10K CHILD',
+                                          '10 K Child',
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
@@ -275,7 +277,7 @@ class _DRegistrationChoiceWidgetState extends State<DRegistrationChoiceWidget> {
                                 RegGravelWidget.routeName,
                                 queryParameters: {
                                   'eventName': serializeParam(
-                                    'Grava del Feugo',
+                                    'Grava del Fuego',
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
@@ -317,7 +319,7 @@ class _DRegistrationChoiceWidgetState extends State<DRegistrationChoiceWidget> {
                                 RegMTBWidget.routeName,
                                 queryParameters: {
                                   'eventName': serializeParam(
-                                    '',
+                                    'Wee-Chi-Tah MTB Races',
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
@@ -359,7 +361,7 @@ class _DRegistrationChoiceWidgetState extends State<DRegistrationChoiceWidget> {
                                 RegRunWidget.routeName,
                                 queryParameters: {
                                   'eventName': serializeParam(
-                                    'Wee Chi Tah Trail Run',
+                                    'Wee-Chi-Tah Trail Run',
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,

@@ -31,6 +31,8 @@ class _Map10KWidgetState extends State<Map10KWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => Map10KModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

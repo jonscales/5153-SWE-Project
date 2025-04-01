@@ -25,6 +25,8 @@ class _TradeshowWidgetState extends State<TradeshowWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TradeshowModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

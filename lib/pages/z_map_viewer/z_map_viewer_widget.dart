@@ -31,6 +31,8 @@ class _ZMapViewerWidgetState extends State<ZMapViewerWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ZMapViewerModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -101,6 +103,7 @@ class _ZMapViewerWidgetState extends State<ZMapViewerWidget> {
               children: [
                 Expanded(
                   child: FlutterFlowGoogleMap(
+                    key: ValueKey('AIzaSyBTQfcLIan74qYRHQ9qjG_4WaqDlBW2Bvo'),
                     controller: _model.googleMapsController,
                     onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
                     initialLocation: _model.googleMapsCenter ??=

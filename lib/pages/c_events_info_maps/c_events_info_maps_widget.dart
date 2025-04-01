@@ -1,4 +1,3 @@
-import '';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -28,6 +27,8 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CEventsInfoMapsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -60,7 +61,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
           },
         ),
         title: Text(
-          'Events & Info',
+          'Events Info Maps',
           style: FlutterFlowTheme.of(context).headlineLarge.override(
                 fontFamily: 'Inter Tight',
                 color: Color(0xFEF4F7F9),
@@ -122,15 +123,16 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFFEFBC39),
+                      color: Color(0xFFEFDE39),
                       textStyle:
                           FlutterFlowTheme.of(context).displayLarge.override(
                                 fontFamily: 'Inter Tight',
+                                fontSize: 30.0,
                                 letterSpacing: 0.0,
                               ),
                       elevation: 0.0,
                       borderSide: BorderSide(
-                        color: Color(0xFFEFBC39),
+                        color: Color(0xFFEFDE39),
                       ),
                       borderRadius: BorderRadius.circular(24.0),
                     ),
@@ -147,18 +149,71 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFFEF7D39),
+                      color: Color(0xFFFFA704),
                       textStyle:
                           FlutterFlowTheme.of(context).displayLarge.override(
                                 fontFamily: 'Inter Tight',
+                                fontSize: 30.0,
                                 letterSpacing: 0.0,
                               ),
                       elevation: 0.0,
                       borderSide: BorderSide(
-                        color: Color(0xFFEF7D39),
+                        color: Color(0xFFFFA704),
                       ),
                       borderRadius: BorderRadius.circular(24.0),
                     ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FFButtonWidget(
+                        onPressed: () async {
+                          context.pushNamed(LocalDiningWidget.routeName);
+                        },
+                        text: 'Dining',
+                        options: FFButtonOptions(
+                          height: 60.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: Color(0xFFFF6A07),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .displayLarge
+                              .override(
+                                fontFamily: 'Inter Tight',
+                                fontSize: 30.0,
+                                letterSpacing: 0.0,
+                              ),
+                          elevation: 0.0,
+                          borderRadius: BorderRadius.circular(22.0),
+                        ),
+                      ),
+                      FFButtonWidget(
+                        onPressed: () {
+                          print('Button pressed ...');
+                        },
+                        text: 'Lodging',
+                        options: FFButtonOptions(
+                          height: 60.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: Color(0xFFFF6A07),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .displayLarge
+                              .override(
+                                fontFamily: 'Inter Tight',
+                                fontSize: 30.0,
+                                letterSpacing: 0.0,
+                              ),
+                          elevation: 0.0,
+                          borderRadius: BorderRadius.circular(22.0),
+                        ),
+                      ),
+                    ],
                   ),
                   FFButtonWidget(
                     onPressed: () async {
@@ -172,7 +227,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                         }.withoutNulls,
                       );
                     },
-                    text: 'Parking &Access',
+                    text: 'Parking & Access',
                     options: FFButtonOptions(
                       width: 250.0,
                       height: 60.0,
@@ -180,7 +235,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFFEF6C39),
+                      color: Color(0xFFFF5D2C),
                       textStyle:
                           FlutterFlowTheme.of(context).titleLarge.override(
                                 fontFamily: 'Inter Tight',
@@ -248,7 +303,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                       width: 250.0,
                       height: 250.0,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: Color(0x00FFFFFF),
                       ),
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Visibility(
@@ -264,7 +319,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                               FFButtonWidget(
                                 onPressed: () async {
                                   context.pushNamed(
-                                    MapMBRunWidget.routeName,
+                                    MapStartLineWidget.routeName,
                                     queryParameters: {
                                       'mapImagePath': serializeParam(
                                         '',
@@ -273,7 +328,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                                     }.withoutNulls,
                                   );
                                 },
-                                text: 'Mnt Bike',
+                                text: 'Start Line',
                                 options: FFButtonOptions(
                                   width: 200.0,
                                   height: 40.0,
@@ -299,7 +354,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                               FFButtonWidget(
                                 onPressed: () async {
                                   context.pushNamed(
-                                    MapStartLineWidget.routeName,
+                                    MapMBRunWidget.routeName,
                                     queryParameters: {
                                       'mapImagePath': serializeParam(
                                         '',
@@ -308,7 +363,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                                     }.withoutNulls,
                                   );
                                 },
-                                text: 'Start Line',
+                                text: 'Mnt Bike',
                                 options: FFButtonOptions(
                                   width: 200.0,
                                   height: 40.0,
@@ -326,7 +381,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                                       ),
                                   elevation: 0.0,
                                   borderSide: BorderSide(
-                                    color: Color(0xFFEFBC39),
+                                    color: Color(0xFFEFC939),
                                   ),
                                   borderRadius: BorderRadius.circular(24.0),
                                 ),
@@ -616,7 +671,7 @@ class _CEventsInfoMapsWidgetState extends State<CEventsInfoMapsWidget> {
                         ),
                       ),
                     ),
-                ].divide(SizedBox(height: 20.0)).around(SizedBox(height: 20.0)),
+                ].divide(SizedBox(height: 15.0)).around(SizedBox(height: 15.0)),
               ),
             ),
           ],

@@ -26,6 +26,8 @@ class _SAGCallWidgetState extends State<SAGCallWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SAGCallModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -114,10 +116,15 @@ class _SAGCallWidgetState extends State<SAGCallWidget> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          await launchURL('tel:9402244662');
                         },
                         text: 'CALL SAG',
+                        icon: Icon(
+                          Icons.phone,
+                          color: Color(0xFFF40404),
+                          size: 50.0,
+                        ),
                         options: FFButtonOptions(
                           width: 250.0,
                           height: 80.0,

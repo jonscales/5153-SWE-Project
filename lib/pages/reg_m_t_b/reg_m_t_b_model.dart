@@ -25,6 +25,9 @@ class RegMTBModel extends FlutterFlowModel<RegMTBWidget> {
     return null;
   }
 
+  // State field(s) for DropDown widget.
+  String? dropDownValue1;
+  FormFieldController<String>? dropDownValueController1;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
@@ -114,8 +117,8 @@ class RegMTBModel extends FlutterFlowModel<RegMTBWidget> {
   }
 
   // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
+  String? dropDownValue2;
+  FormFieldController<String>? dropDownValueController2;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode9;
   TextEditingController? textController9;

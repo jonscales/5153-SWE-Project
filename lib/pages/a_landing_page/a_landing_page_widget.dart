@@ -1,10 +1,11 @@
-import '';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'a_landing_page_model.dart';
 export 'a_landing_page_model.dart';
 
@@ -47,6 +48,8 @@ class _ALandingPageWidgetState extends State<ALandingPageWidget> {
 
     _model.textController3 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -58,6 +61,8 @@ class _ALandingPageWidgetState extends State<ALandingPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -404,6 +409,11 @@ class _ALandingPageWidgetState extends State<ALandingPageWidget> {
                                             .validate()) {
                                       return;
                                     }
+                                    await AddTestUserCall.call(
+                                      firstName: FFAppState().firstName,
+                                      lastName: FFAppState().lastName,
+                                      email: FFAppState().email,
+                                    );
 
                                     context
                                         .pushNamed(BMainMenuWidget.routeName);

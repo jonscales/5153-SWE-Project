@@ -26,6 +26,8 @@ class _ZMapsWidgetState extends State<ZMapsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ZMapsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

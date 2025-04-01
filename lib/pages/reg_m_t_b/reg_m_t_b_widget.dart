@@ -1,4 +1,3 @@
-import '';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,6 +8,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +39,12 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RegMTBModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().mainEvent = widget.eventName!;
+      safeSetState(() {});
+    });
 
     _model.textController1 ??= TextEditingController(text: widget.eventName);
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -71,6 +77,8 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
 
     _model.textController10 ??= TextEditingController();
     _model.textFieldFocusNode10 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -160,6 +168,15 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   child: TextFormField(
                                     controller: _model.textController1,
                                     focusNode: _model.textFieldFocusNode1,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController1',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().mainEvent =
+                                            _model.textController1.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -228,6 +245,60 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                         .asValidator(context),
                                   ),
                                 ),
+                              ),
+                              FlutterFlowDropDown<String>(
+                                controller: _model.dropDownValueController1 ??=
+                                    FormFieldController<String>(
+                                  _model.dropDownValue1 ??= '',
+                                ),
+                                options: List<String>.from([
+                                  'Cat 1 ( 23 mi)',
+                                  'Cat 2 (16mi)',
+                                  'Novice (11.5mi)',
+                                  'Beginner (11.5mi)',
+                                  'Junior (9-18 yr old  11.5mi)'
+                                ]),
+                                optionLabels: [
+                                  'Cat 1 ( 23 mi)',
+                                  'Cat 2 (16mi)',
+                                  'Novice (11.5mi)',
+                                  'Beginner (11.5mi)',
+                                  'Junior (9-18 yr old  11.5mi)'
+                                ],
+                                onChanged: (val) async {
+                                  safeSetState(
+                                      () => _model.dropDownValue1 = val);
+                                  FFAppState().subEvent =
+                                      _model.dropDownValue1!;
+                                  safeSetState(() {});
+                                },
+                                width: 350.0,
+                                height: 40.0,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                                hintText: 'Choose Rider Category',
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                elevation: 2.0,
+                                borderColor: Color(0xFFFF8908),
+                                borderWidth: 4.0,
+                                borderRadius: 24.0,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 12.0, 0.0),
+                                hidesUnderline: true,
+                                isOverButton: false,
+                                isSearchable: false,
+                                isMultiSelect: false,
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
@@ -468,6 +539,15 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   child: TextFormField(
                                     controller: _model.textController5,
                                     focusNode: _model.textFieldFocusNode5,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController5',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().phoneNum =
+                                            _model.textController5.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     textCapitalization: TextCapitalization.none,
                                     obscureText: false,
@@ -548,6 +628,15 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   child: TextFormField(
                                     controller: _model.textController6,
                                     focusNode: _model.textFieldFocusNode6,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController6',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().city =
+                                            _model.textController6.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -625,6 +714,15 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   child: TextFormField(
                                     controller: _model.textController7,
                                     focusNode: _model.textFieldFocusNode7,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController7',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().zipCode =
+                                            _model.textController7.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -804,15 +902,19 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   ),
                                   FlutterFlowDropDown<String>(
                                     controller:
-                                        _model.dropDownValueController ??=
+                                        _model.dropDownValueController2 ??=
                                             FormFieldController<String>(
-                                      _model.dropDownValue ??= '',
+                                      _model.dropDownValue2 ??= '',
                                     ),
-                                    options: List<String>.from(
-                                        ['Option 1', 'Option 2']),
+                                    options:
+                                        List<String>.from(['Male', 'Female']),
                                     optionLabels: ['Male', 'Female'],
-                                    onChanged: (val) => safeSetState(
-                                        () => _model.dropDownValue = val),
+                                    onChanged: (val) async {
+                                      safeSetState(
+                                          () => _model.dropDownValue2 = val);
+                                      FFAppState().sex = _model.dropDownValue2!;
+                                      safeSetState(() {});
+                                    },
                                     width: 125.0,
                                     height: 40.0,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -850,6 +952,15 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   child: TextFormField(
                                     controller: _model.textController9,
                                     focusNode: _model.textFieldFocusNode9,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController9',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().emerContName =
+                                            _model.textController9.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -927,6 +1038,15 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   child: TextFormField(
                                     controller: _model.textController10,
                                     focusNode: _model.textFieldFocusNode10,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController10',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        FFAppState().emerContPhone =
+                                            _model.textController10.text;
+                                        safeSetState(() {});
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -1016,11 +1136,25 @@ class _RegMTBWidgetState extends State<RegMTBWidget> {
                                   return;
                                 }
                                 if (FFAppState().isAdult) {
-                                  context
-                                      .pushNamed(WaiverAdultWidget.routeName);
+                                  context.pushNamed(
+                                    WaiverAdultWidget.routeName,
+                                    queryParameters: {
+                                      'eventName': serializeParam(
+                                        widget.eventName,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
                                 } else {
-                                  context
-                                      .pushNamed(WaiverMinorWidget.routeName);
+                                  context.pushNamed(
+                                    WaiverMinorWidget.routeName,
+                                    queryParameters: {
+                                      'eventName': serializeParam(
+                                        widget.eventName,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
                                 }
                               },
                               text: 'Sign Waiver',

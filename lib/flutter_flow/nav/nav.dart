@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -67,11 +69,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: DRegistrationChoiceWidget.routeName,
           path: DRegistrationChoiceWidget.routePath,
           builder: (context, params) => DRegistrationChoiceWidget(),
-        ),
-        FFRoute(
-          name: SchedulesWidget.routeName,
-          path: SchedulesWidget.routePath,
-          builder: (context, params) => SchedulesWidget(),
         ),
         FFRoute(
           name: ZMapsWidget.routeName,
@@ -169,11 +166,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: RegistrationWidget.routeName,
-          path: RegistrationWidget.routePath,
-          builder: (context, params) => RegistrationWidget(),
-        ),
-        FFRoute(
           name: MapGravelWidget.routeName,
           path: MapGravelWidget.routePath,
           builder: (context, params) => MapGravelWidget(
@@ -194,79 +186,34 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: RegGravelWidget.routeName,
-          path: RegGravelWidget.routePath,
-          builder: (context, params) => RegGravelWidget(
-            eventName: params.getParam(
-              'eventName',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: XRegMTBikeWidget.routeName,
-          path: XRegMTBikeWidget.routePath,
-          builder: (context, params) => XRegMTBikeWidget(
-            eventName: params.getParam(
-              'eventName',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: RegRunWidget.routeName,
-          path: RegRunWidget.routePath,
-          builder: (context, params) => RegRunWidget(
-            eventName: params.getParam(
-              'eventName',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: Reg10KAdultWidget.routeName,
-          path: Reg10KAdultWidget.routePath,
-          builder: (context, params) => Reg10KAdultWidget(
-            eventName: params.getParam(
-              'eventName',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: ZRegCritsWidget.routeName,
-          path: ZRegCritsWidget.routePath,
-          builder: (context, params) => ZRegCritsWidget(
-            eventName: params.getParam(
-              'eventName',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: Reg10KChildWidget.routeName,
-          path: Reg10KChildWidget.routePath,
-          builder: (context, params) => Reg10KChildWidget(
-            eventName: params.getParam(
-              'eventName',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
           name: WaiverAdultWidget.routeName,
           path: WaiverAdultWidget.routePath,
-          builder: (context, params) => WaiverAdultWidget(),
+          builder: (context, params) => WaiverAdultWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: WaiverMinorWidget.routeName,
           path: WaiverMinorWidget.routePath,
-          builder: (context, params) => WaiverMinorWidget(),
+          builder: (context, params) => WaiverMinorWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: PaymentPageWidget.routeName,
           path: PaymentPageWidget.routePath,
-          builder: (context, params) => PaymentPageWidget(),
+          builder: (context, params) => PaymentPageWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: ProfileWidget.routeName,
@@ -305,6 +252,51 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SAGCallResponseWidget.routeName,
           path: SAGCallResponseWidget.routePath,
           builder: (context, params) => SAGCallResponseWidget(),
+        ),
+        FFRoute(
+          name: RegRunWidget.routeName,
+          path: RegRunWidget.routePath,
+          builder: (context, params) => RegRunWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RegGravelWidget.routeName,
+          path: RegGravelWidget.routePath,
+          builder: (context, params) => RegGravelWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Reg10KChildWidget.routeName,
+          path: Reg10KChildWidget.routePath,
+          builder: (context, params) => Reg10KChildWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Reg10KAdultWidget.routeName,
+          path: Reg10KAdultWidget.routePath,
+          builder: (context, params) => Reg10KAdultWidget(
+            eventName: params.getParam(
+              'eventName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: SchedulesWidget.routeName,
+          path: SchedulesWidget.routePath,
+          builder: (context, params) => SchedulesWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -376,6 +368,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -393,6 +386,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }

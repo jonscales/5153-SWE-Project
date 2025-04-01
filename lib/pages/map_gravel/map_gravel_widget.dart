@@ -31,6 +31,8 @@ class _MapGravelWidgetState extends State<MapGravelWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapGravelModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

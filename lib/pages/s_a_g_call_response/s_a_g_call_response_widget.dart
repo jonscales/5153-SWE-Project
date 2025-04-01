@@ -32,6 +32,8 @@ class _SAGCallResponseWidgetState extends State<SAGCallResponseWidget> {
 
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

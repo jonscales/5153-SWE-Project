@@ -28,6 +28,8 @@ class _BMainMenuWidgetState extends State<BMainMenuWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BMainMenuModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

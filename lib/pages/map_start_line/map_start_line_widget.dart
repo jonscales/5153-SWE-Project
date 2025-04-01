@@ -31,6 +31,8 @@ class _MapStartLineWidgetState extends State<MapStartLineWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapStartLineModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

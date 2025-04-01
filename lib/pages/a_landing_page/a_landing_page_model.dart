@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'a_landing_page_widget.dart' show ALandingPageWidget;
@@ -7,6 +8,11 @@ class ALandingPageModel extends FlutterFlowModel<ALandingPageWidget> {
   ///  Local state fields for this page.
 
   bool isFormValid = false;
+
+  UserStruct? user;
+  void updateUserStruct(Function(UserStruct) updateFn) {
+    updateFn(user ??= UserStruct());
+  }
 
   ///  State fields for stateful widgets in this page.
 

@@ -32,6 +32,8 @@ class _MapEnduranceRoutesWidgetState extends State<MapEnduranceRoutesWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapEnduranceRoutesModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
