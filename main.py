@@ -42,6 +42,7 @@ class Rider(Base):
     emr_contact_name=Column(String(100))
     emr_cont_phone=Column(String(20))
     parent_name=Column(String(100), nullable=True)
+    waiver_signed=Column(String(10))
 
 
 class User(Base):
@@ -71,6 +72,7 @@ class RegistrationRequest(BaseModel):
     sub_event: Optional[str] = None
     rider_category: Optional [str] = None
     parent_name: Optional [str] = None
+    waiver_signed: str
     
 
 
@@ -94,6 +96,7 @@ def register_rider(rider: RegistrationRequest, api_key: str = Header(...)):
         sub_event=rider.sub_event,
         rider_category=rider.rider_category,
         parent_name=rider.parent_name,
+        waiver_signed=rider.waiver_signed
         
     )    
     db.add(new_rider)
