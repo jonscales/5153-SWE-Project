@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Header, HTTPException, Depends, Security
 from fastapi.security.api_key import APIKeyHeader
 from pydantic import BaseModel
-from typing import Optional
-from sqlalchemy import Boolean, Column, Integer, String, create_engine
+from typing import Optional, List
+from sqlalchemy import Boolean, Column, Integer, String, create_engine, JSON
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 import datetime
@@ -57,10 +57,10 @@ class Vendor(Base):
     __tablename__ = "vendors"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100))
-    booth = Column(String(10))
-    categories = Column(String(255))
+    booth_location = Column(String(50))
+    categories = Column(JSON)
     website = Column(String(255))
-    logoUrl = Column(String(500))
+    logourl = Column(String(500))
 
 # Create the table(s)
 Base.metadata.create_all(bind=engine)
@@ -127,10 +127,10 @@ class SepUserRequest(BaseModel):
 class VendorResponse(BaseModel):
     id: int
     name: str
-    booth: str
-    categories: str
+    booth_location: str
+    categories: List[str]
     website: str
-    logoUrl: str
+    logourl: str
 
     class Config:
         orm_mode = True
@@ -169,7 +169,8 @@ def add_test_user(user: SepUserRequest, api_key: str = Header(...)):
 #     return {"message": f"{user.first_name} {user.last_name} added as user."}
 
 @app.get("/vendors", response_model=list[VendorResponse])
-def get_vendors(_: str = Depends(verify_api_key)):
+def add_test_user(api_key: str = Header(...)):
+    verify_api_key(api_key)
     
     db = SessionLocal()
     vendors = db.query(Vendor).all()
