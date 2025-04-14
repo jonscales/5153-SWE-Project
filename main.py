@@ -53,6 +53,15 @@ class User(Base):
     email = Column(String(100), unique=True)
     created_at = Column(String(100))  # You can switch to DateTime if preferred
 
+class Vendor(Base):
+    __tablename__ = "vendors"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100))
+    booth = Column(String(10))
+    categories = Column(String(255))
+    website = Column(String(255))
+    logoUrl = Column(String(500))
+
 # Create the table(s)
 Base.metadata.create_all(bind=engine)
 
@@ -115,6 +124,17 @@ class SepUserRequest(BaseModel):
     last_name: str
     email: str
 
+class VendorResponse(BaseModel):
+    id: int
+    name: str
+    booth: str
+    categories: str
+    website: str
+    logoUrl: str
+
+    class Config:
+        orm_mode = True
+
 @app.post("/add_test_user")
 def add_test_user(user: SepUserRequest, api_key: str = Header(...)):
     verify_api_key(api_key)
@@ -132,18 +152,26 @@ def add_test_user(user: SepUserRequest, api_key: str = Header(...)):
     return {"message": f"{user.first_name} {user.last_name} added via test endpoint."}
 
 
-@app.post("/add_user")
-def add_user(user: UserRequest, api_key: str = Header(...)):
-    verify_api_key(api_key)
+# @app.post("/add_user")
+# def add_user(user: UserRequest, api_key: str = Header(...)):
+#     verify_api_key(api_key)
+#     db = SessionLocal()
+#     new_user = User(
+#         first_name=user.first_name,
+#         last_name=user.last_name,
+#         email=user.email,
+#         created_at=str(datetime.datetime.now())
+#     )
+#     db.add(new_user)
+#     db.commit()
+#     db.refresh(new_user)
+#     db.close()
+#     return {"message": f"{user.first_name} {user.last_name} added as user."}
+
+@app.get("/vendors", response_model=list[VendorResponse])
+def get_vendors(_: str = Depends(verify_api_key)):
+    
     db = SessionLocal()
-    new_user = User(
-        first_name=user.first_name,
-        last_name=user.last_name,
-        email=user.email,
-        created_at=str(datetime.datetime.now())
-    )
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
+    vendors = db.query(Vendor).all()
     db.close()
-    return {"message": f"{user.first_name} {user.last_name} added as user."}
+    return vendors
