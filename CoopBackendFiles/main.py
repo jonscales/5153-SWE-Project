@@ -198,7 +198,7 @@ templates = Jinja2Templates(directory="templates")
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "Wolf$2017",
+    "password": "***********",
     "database": "hhh_test_db",
 }
 
