@@ -1,0 +1,232 @@
+<!--
+===============================================================================
+    File: riders_list.html
+    Description: Displays a dynamically populated list of riders for the HHH 
+                 cycling event. Allows admins to search, update payment status,
+                 and assign bib numbers through a web interface. Includes a 
+                 search bar, update form, and live visual feedback using JavaScript.
+
+    Author: Kings of Code (Cooper Wolf, Jon Scales, Tim Haxton)
+    Project: HHH Cycling Event Management App
+    Technologies: HTML, CSS, JavaScript, Jinja2 (templating)
+
+    Features:
+    - Dynamic table of registered riders
+    - Search bar for filtering by name or phone
+    - Update form for payment status and bib assignment
+    - Editable bib numbers with real-time UI feedback
+    - Background image and top-right logo
+    - Responsive, styled layout with accessibility considerations
+
+    Last Updated: 4/17/2025
+===============================================================================
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riders List</title>
+    <style>
+
+        /* Creating a clear table output */
+        table
+        {
+            /* Adds scroll bar if zoomed in too much */
+            overflow-y auto
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Defining design for table header and table data */
+        th, td {
+            border: 1px solid black;
+            padding: 8px; /* Keeps padding minimal */
+            text-align: center;
+            font-size: 1.5rem; /* Adjusts font size to make the text larger */
+            font-weight: bold; /* Ensures the text is bold */
+            line-height: 1.2; /* Controls spacing within the text for better balance */
+        }
+
+        /* White background and center text for the title */
+        th {background-color: #f2f2f2;}
+
+
+        h1 {text-align: center;}
+
+        /* placing the image in the top right corner */
+        .logo-container
+        {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    
+        /* Adjust this to make it smaller */
+        .logo-container img
+        {
+            width: 80px;
+            height: auto;
+        }
+
+        /* Rounding the borders of the logo */
+        img {border-radius: 10px;}
+
+        /* Defining design for background image and properties*/
+        body {
+            background-image: url('https://raw.githubusercontent.com/jonscales/5153-SWE-Project/main/landing_logo1.png'); /* Replace with your image URL */
+            background-position: center; /* Centers the background image */
+            background-size: cover; /* Ensures the image scales to cover the entire page */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-attachment: fixed; /* Makes the background stay in place while scrolling */
+            background-blend-mode: lighten; /* Blends the image with a lighter effect */
+            background-color: rgba(255, 255, 255, 0.8); /* Adds a semi-transparent white overlay */
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Uploading Kings of Code logo -->
+    <div class="logo-container">
+        <img src="https://raw.githubusercontent.com/jonscales/5153-SWE-Project/main/Kings%20of%20Code%20logo.png" alt="HHH Logo">
+    </div>
+
+    <h1>HHH Riders List</h1>
+
+    <!-- Search Bar -->
+    <label for="search">Search:</label>
+    <input type="text" id="search" placeholder="Rider's Name or Phone" onkeyup="filterRiders()">
+
+    <table id="ridersTable" border="1">
+        <tr>
+            <th>Rider</th>
+            <th>Phone</th>
+            <th>Category</th>
+            <th>Fee</th>
+            <th>Actions</th>
+        </tr>
+
+        <!-- Loop to populate the table with rider data from backend -->
+        {% for rider in riders %}
+        <tr>
+            <td class="riderName">{{ rider['rider_name'] }}</td>
+            <td class="riderPhone">{{ rider['phone'] }}</td>
+            <td>{{ rider['event_main'] or 'Not Registered' }}</td>
+            <td>${{ rider['event_fee'] }}</td>
+
+            <td>
+                <!-- Form to update Has Paid status and Bib Number -->
+                <form onsubmit="updateRider(event, {{ rider.rider_id }}, {{ rider.event_id }})">
+                    <input type="hidden" name="has_paid" value="False">
+                    <label for="has_paid">Paid:</label>
+                    <input type="checkbox" name="has_paid" value="True" {% if rider['has_paid'] %}checked{% endif %}>
+                    <br>
+
+                    <!-- Bib Number Field (Disabled if value already exists) -->
+                    <label for="bib_number">Bib Number:</label>
+                    <input type="number" id="bib_number_{{ rider['rider_id'] }}" name="bib_number" 
+                        value="{{ rider['bib_number'] }}" min="0" required {% if rider['bib_number'] %}disabled{% endif %}>
+
+                    <!-- Conditionally show Edit button only for riders with assigned bib numbers -->
+                    {% if rider['bib_number'] %}
+                    <button type="button" onclick="unlockBibNumber({{ rider['rider_id'] }})">Edit</button>
+                    {% endif %}
+
+                    <br>
+
+                    <!-- Conditionally lock the Update Rider button if bib number is assigned -->
+                    <input type="submit" id="update_button_{{ rider['rider_id'] }}" value="Update Rider" {% if rider['bib_number'] %}disabled{% endif %}>
+                    
+                    <!-- Status Feedback -->
+                    <span id="status-{{ rider.rider_id }}" style="margin-left: 10px;"></span>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Search function for rider names and phone numbers
+        function filterRiders() {
+            const searchValue = document.getElementById("search").value.toLowerCase();
+            const table = document.getElementById("ridersTable");
+            const rows = table.getElementsByTagName("tr");
+
+            // Loop through all rows excep the header
+            for (let i = 1; i < rows.length; i++)
+            {
+                const riderNameCell = rows[i].getElementsByClassName("riderName")[0];
+                const riderPhoneCell = rows[i].getElementsByClassName("riderPhone")[0];
+
+                if (riderNameCell && riderPhoneCell)
+                {
+                    const nameText = riderNameCell.textContent.toLowerCase();
+                    const phoneText = riderPhoneCell.textContent.toLowerCase();
+
+                    // Show row only if match is found
+                    rows[i].style.display = nameText.includes(searchValue) || phoneText.includes(searchValue) ? "" : "none";
+                }
+            }
+        }
+
+        // Function to enable bib number input and Update button for editing
+        function unlockBibNumber(riderId)
+        {
+            const bibNumberInput = document.getElementById(`bib_number_${riderId}`);
+            const updateButton = document.getElementById(`update_button_${riderId}`);
+
+            if (bibNumberInput && updateButton)
+            {
+                bibNumberInput.disabled = false;
+                updateButton.disabled = false;
+
+                // Visual feedback
+                bibNumberInput.style.backgroundColor = "#ffdddd";
+            }
+        }
+
+        // Function to handle form submission and send POST request to backend
+        async function updateRider(event, riderId, eventId)
+        {
+            // Prevent default form submission
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const statusSpan = document.getElementById(`status-${riderId}`);
+        
+            try
+            {
+              // Updating the rider bib number and has paid section
+              const response = await fetch(`/update_rider/${riderId}/${eventId}`,
+              {
+                method: 'POST',
+                body: formData
+              });
+        
+              // Return green updated check
+              if (response.ok)
+              {
+                statusSpan.textContent = "✔ Updated";
+                statusSpan.style.color = "green";
+              }
+              // Return red 'X' if updated failed
+              else
+              {
+                statusSpan.textContent = "✘ Failed";
+                statusSpan.style.color = "red";
+              }
+            }
+            // Return red 'X' if updated failed
+            catch (error)
+            {
+              statusSpan.textContent = "✘ Error";
+              statusSpan.style.color = "red";
+            }
+          }
+    </script>
+</body>
+</html>
+
