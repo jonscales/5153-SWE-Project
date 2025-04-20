@@ -1,4 +1,0 @@
-What information will Admin give to request information from the database? Anything it can to id a single person? or just bib number?
-
-Will we need two separte codes for react (web) and react native (mobile)?
-

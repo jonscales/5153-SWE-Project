@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>713086161262-ln2hcuqqer46dd5eilop6vahs3q715rs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.713086161262-ln2hcuqqer46dd5eilop6vahs3q715rs</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>713086161262-5mr9nqn86gc383uo4c4tkcn9pt10odva.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAQ1r1lKFXjKfVxaWnU1lQWAD5D2GUMC4A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>713086161262</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.hhhtherideapp</string>
+	<key>PROJECT_ID</key>
+	<string>h-h-h-the-ride-app-8hkscw</string>
+	<key>STORAGE_BUCKET</key>
+	<string>h-h-h-the-ride-app-8hkscw.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:713086161262:ios:bcf88013a7e74bb6f7b17f</string>
+</dict>
+</plist>
