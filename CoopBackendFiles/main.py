@@ -198,8 +198,8 @@ templates = Jinja2Templates(directory="templates")
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "***********",
-    "database": "hhh_test_db",
+    "password": "scalesHHHapp",
+    "database": "hhh_db",
 }
 
 # Function to get the database connection
@@ -326,7 +326,7 @@ async def get_user(email: str):
 
     # Query the database to retrieve the user by email
     # and fetching the first matching user
-    cursor.execute("SELECT * FROM user WHERE email = %s", (email,))
+    cursor.execute("SELECT * FROM user WHERE email = %s", (email))
     user = cursor.fetchone()
 
     # Closing connection
