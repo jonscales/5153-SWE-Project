@@ -9,7 +9,7 @@ This FastAPI application provides endpoints for handling user and rider registra
 for the Hotter'N Hell Hundred (HHH) cycling event through Flutterflow and MySQL database.
 It facilitates the following:
 
-1. **User Registration** (`/registerUserr`)  
+1. **User Registration** (`/registerUser`)  
    - Registers a user with first name, last name, and email.  
 
 2. **User Retrieval** (`/get_user/{email}`)  
@@ -262,7 +262,7 @@ class Vendor(BaseModel):
     vendor_id: int
     name: str
     category: str
-    booth_location: str
+    booth: str
     website: str
     logo: str
 
@@ -285,7 +285,7 @@ class SagInfo(BaseModel):
 # User information from the app will be inserted
 # into the user table of the HHH database
 ################################################
-@app.post("/registerUserr")
+@app.post("/registerUser")
 async def register_user(user: User):
     
     # receiving user information and storing into variables
@@ -415,7 +415,7 @@ async def register_rider(request: RegisterRider):
         # Creating a row for the new rider in the database
         cursor.execute("""
                        INSERT INTO rider (user_id, gender, age, city,
-                       state_country, phone, emg_cont_name, emg_cont_phone)
+                       state_coauntry, phone, emg_cont_name, emg_cont_phone)
                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                        """, (user_id, gender, age, city, state_country,
                              phone, emg_cont_name, emg_cont_phone))
@@ -545,6 +545,106 @@ async def update_rider(request: Request, rider_id: int, event_id: int,
     
     # Return a JSON to update the rider
     return JSONResponse(content={"message": "Rider updated successfully"})
+
+
+###############################################################
+# API endpoint to GET a rider's event_main, event_sub, bib_number 
+# & ride_time fields to display them in flutterflow results page 
+# fields.  The ride_time is initially set as a dummy value of 
+# 4 h 15 m as this will have to be added to the database after 
+# ride completion from another source. 
+# The lookup is based on user email joined with rider, rider_event 
+# & event tables.
+###############################################################
+
+@app.get("/get_rider_event_info")
+async def get_rider_event_info(email: str, event_main: str):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        # Get user_id from email
+        cursor.execute("SELECT user_id FROM user WHERE email = %s", (email,))
+        user = cursor.fetchone()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        user_id = user["user_id"]
+
+        # Get rider_id from user_id
+        cursor.execute("SELECT rider_id FROM rider WHERE user_id = %s", (user_id,))
+        rider = cursor.fetchone()
+        if not rider:
+            raise HTTPException(status_code=404, detail="Rider not found")
+        rider_id = rider["rider_id"]
+
+        # Get event_id and event_sub from event_main
+        cursor.execute("SELECT event_id, event_sub FROM event WHERE event_main = %s", (event_main,))
+        event = cursor.fetchone()
+        if not event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        event_id = event["event_id"]
+        event_sub = event["event_sub"]
+
+        # Get bib_number from rider_event
+        cursor.execute("""
+            SELECT bib_number 
+            FROM rider_event 
+            WHERE rider_id = %s AND event_id = %s
+        """, (rider_id, event_id))
+        rider_event = cursor.fetchone()
+        if not rider_event:
+            raise HTTPException(status_code=404, detail="Rider is not registered for this event")
+
+        return {
+            "event_main": event_main,
+            "event_sub": event_sub,
+            "bib_number": rider_event["bib_number"],
+            "ride_time": "4h 15m"  # Simulated value
+        }
+
+    finally:
+        cursor.close()
+        connection.close()
+
+###############################################################
+# API endpoint to GET a rider's bib_number to display them in 
+# flutterflow profile page 
+###############################################################
+
+@app.get("/get_rider_bibs")
+async def get_rider_bibs(email: str):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        # Get user_id from user table
+        cursor.execute("SELECT user_id FROM user WHERE email = %s", (email,))
+        user = cursor.fetchone()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        user_id = user["user_id"]
+
+        # Get rider_id from rider table
+        cursor.execute("SELECT rider_id FROM rider WHERE user_id = %s", (user_id,))
+        rider = cursor.fetchone()
+        if not rider:
+            raise HTTPException(status_code=404, detail="Rider not found")
+        rider_id = rider["rider_id"]
+
+        # Get all events the rider is registered in with bib numbers
+        cursor.execute("""
+            SELECT event.event_main, event.event_sub, rider_event.bib_number
+            FROM rider_event
+            JOIN event ON rider_event.event_id = event.event_id
+            WHERE rider_event.rider_id = %s
+        """, (rider_id,))
+        results = cursor.fetchall()
+
+        return results  # Returns a list of event entries with bib numbers
+
+    finally:
+        cursor.close()
+        connection.close()
 
 
 ###############################################################
